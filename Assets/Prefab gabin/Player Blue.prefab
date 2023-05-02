@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 8353341533969243859}
   - component: {fileID: 550211858180396968}
   - component: {fileID: 7990502870892669579}
+  - component: {fileID: 6476031874344125783}
   m_Layer: 6
   m_Name: Player Blue
   m_TagString: Untagged
@@ -30,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 4412025933784630834}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 2.0855637, y: 49.6, z: -64.9}
-  m_LocalScale: {x: 9.453119, y: 9.453119, z: 9.453119}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6082414271942948408}
@@ -110,7 +111,7 @@ Rigidbody:
   m_GameObject: {fileID: 4412025933784630834}
   serializedVersion: 2
   m_Mass: 1
-  m_Drag: 2
+  m_Drag: 3.5
   m_AngularDrag: 0.05
   m_UseGravity: 1
   m_IsKinematic: 0
@@ -130,7 +131,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementType: 1
-  maximumVelocity: 7
+  maximumVelocity: 5.8
   useXAxis: 1
   useYAxis: 0
   useZAxis: 1
@@ -138,9 +139,9 @@ MonoBehaviour:
   xInputName: Horizontal
   yInputName: Vertical
   zInputName: Vertical
-  xSpeed: 7
+  xSpeed: 5.8
   ySpeed: 5
-  zSpeed: 7
+  zSpeed: 5.8
   lookAtDirection: 1
   isMovementLocal: 0
   useWallAvoidance: 0
@@ -174,6 +175,53 @@ MonoBehaviour:
   xInputChoiceIndex: 0
   yInputChoiceIndex: 0
   zInputChoiceIndex: 1
+--- !u!114 &6476031874344125783
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4412025933784630834}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7161034128e87f45b2b5b64fdb70f4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  directionInputType: 2
+  horizontalAxis: 0
+  horizontalAxisName: Horizontal
+  verticalAxis: 1
+  verticalAxisName: Horizontal
+  impulseInputName: Fire2
+  depthAxis: 2
+  resetVelocityOnImpulse: 0
+  impulseForce: 17
+  useCooldown: 1
+  cooldown: 3
+  minimalHeightToImpulse: 0
+  heightAxis: 1
+  groundDetectionLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  collisionOffset: {x: 0, y: 0.1, z: 0}
+  requireResources: 0
+  resourceManager: {fileID: 0}
+  resourceIndex: 
+  resourceCostOnUse: 1
+  preventMovingAfterImpulse: 1
+  mover: {fileID: 7990502870892669579}
+  movePreventionDuration: 0.75
+  fXFeedbackType: 2
+  impulseParticleSystem: {fileID: 0}
+  spawnedFX: {fileID: 0}
+  fxOffset: {x: 0, y: 0, z: 0}
+  timeBeforeDestroyFX: 3
+  animator: {fileID: 0}
+  dashTriggerName: dash
+  displayDebugInfo: 0
+  impulseIndex: 3
+  horizontalIndex: 0
+  verticalIndex: 0
 --- !u!1 &4600525944206964028
 GameObject:
   m_ObjectHideFlags: 0
