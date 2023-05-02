@@ -13,8 +13,7 @@ GameObject:
   - component: {fileID: 44985403662518364}
   - component: {fileID: 8353341533969243859}
   - component: {fileID: 550211858180396968}
-  - component: {fileID: -1323311280160015982}
-  - component: {fileID: 1119707383114978281}
+  - component: {fileID: 7990502870892669579}
   m_Layer: 6
   m_Name: Player Blue
   m_TagString: Untagged
@@ -118,7 +117,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 2
---- !u!114 &-1323311280160015982
+--- !u!114 &7990502870892669579
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -127,27 +126,54 @@ MonoBehaviour:
   m_GameObject: {fileID: 4412025933784630834}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e741851cba3ad425c91ecf922cc6b379, type: 3}
+  m_Script: {fileID: 11500000, guid: 237cc2000fb3c774fae7752d1347f535, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _data:
-    _json: '{"declarations":{"Kind":"Object","collection":{"$content":[],"$version":"A"},"$version":"A"}}'
-    _objectReferences: []
---- !u!114 &1119707383114978281
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4412025933784630834}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d2fe5546f775c47d2820aa5e8a715f53, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _data:
-    _json: '{"nest":{"source":"Macro","macro":null,"embed":null}}'
-    _objectReferences: []
+  movementType: 1
+  maximumVelocity: 7
+  useXAxis: 1
+  useYAxis: 0
+  useZAxis: 1
+  requiresInput: 1
+  xInputName: Horizontal
+  yInputName: Vertical
+  zInputName: Vertical
+  xSpeed: 7
+  ySpeed: 5
+  zSpeed: 7
+  lookAtDirection: 1
+  isMovementLocal: 0
+  useWallAvoidance: 0
+  wallAvoidanceSize: {x: 0.3, y: 1, z: 0.1}
+  wallAvoidanceOffset: {x: 0, y: 0, z: 0.5}
+  wallAvoidanceLayers:
+    serializedVersion: 2
+    m_Bits: 1
+  animator: {fileID: 0}
+  movementParticleSystem: {fileID: 0}
+  minVelocityToToggle: 0.2
+  xDirParameterName: xDirection
+  yDirParameterName: yDirection
+  zDirParameterName: zDirection
+  keepOrientationOnIdle: 1
+  trackSpeed: 1
+  speedParameterName: MoveSpeed
+  animateWhenGroundedOnly: 0
+  collisionCheckRadius: 0.65
+  collisionOffset: {x: 0, y: 0.1, z: 0}
+  groundLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  groundedParameterName: isGrounded
+  useGravity: 1
+  gravityForce: 10
+  maxGravityForce: 50
+  displayDebugInfo: 1
+  canMove: 1
+  currentSpeed: {x: 0, y: 0, z: 0}
+  xInputChoiceIndex: 0
+  yInputChoiceIndex: 0
+  zInputChoiceIndex: 1
 --- !u!1 &4600525944206964028
 GameObject:
   m_ObjectHideFlags: 0
