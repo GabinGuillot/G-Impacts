@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 6606800425956945966}
   - component: {fileID: 8959039212015895780}
   - component: {fileID: 7752228861506639997}
+  - component: {fileID: 7167853151586685716}
+  - component: {fileID: 5066535412539357811}
   m_Layer: 0
   m_Name: box_bonus
   m_TagString: Untagged
@@ -99,3 +101,30 @@ MonoBehaviour:
   _data:
     _json: '{"declarations":{"Kind":"Object","collection":{"$content":[],"$version":"A"},"$version":"A"}}'
     _objectReferences: []
+--- !u!65 &7167853151586685716
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7445605506484233521}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.39999998, y: 0.40000007, z: 0.40000004}
+  m_Center: {x: 0, y: 0, z: 0.20000005}
+--- !u!114 &5066535412539357811
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7445605506484233521}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33751a43147047d4697f435544f8be98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  useTag: 1
+  tagName: Player
