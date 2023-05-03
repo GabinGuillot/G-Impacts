@@ -115,7 +115,10 @@ public class DirectionalImpulse : MonoBehaviour
 
 	private bool CooldownCheck()
 	{
-		return !useCooldown || timer.PunctualCooldownCheck(cooldown);
+		bool pcdCheck = timer.PunctualCooldownCheck(cooldown);
+
+        bool cooldownCheck = !useCooldown || pcdCheck;
+        return cooldownCheck;
 	}
 
 	private bool HeightCheck ()
@@ -235,11 +238,6 @@ public class DirectionalImpulse : MonoBehaviour
 
 			rigid.AddForce(direction * impulseForce, ForceMode.Impulse);
 
-			if(useCooldown)
-			{
-				timer = cooldown;
-			}
-
 			if (preventMovingAfterImpulse)
 			{
 				if (mover != null)
@@ -307,9 +305,9 @@ public class DirectionalImpulse : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
-		if(CooldownCheck())
+		if(Input.GetButtonDown(impulseInputName))
 		{
-			if (Input.GetButtonDown(impulseInputName))
+			if (CooldownCheck())
 			{
 				if (HeightCheck())
 				{

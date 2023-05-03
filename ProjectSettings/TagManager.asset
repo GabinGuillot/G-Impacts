@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - balle
+  - Void
   layers:
   - Default
   - TransparentFX
@@ -12,12 +13,12 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Player Blue
+  - Player Red
+  - Ball
+  - Wall
+  - Void
+  - Floor
   - 
   - 
   - 
