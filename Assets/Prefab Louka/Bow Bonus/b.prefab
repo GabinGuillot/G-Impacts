@@ -14,8 +14,9 @@ GameObject:
   - component: {fileID: 7752228861506639997}
   - component: {fileID: 7167853151586685716}
   - component: {fileID: 5066535412539357811}
+  - component: {fileID: 8495579383775826736}
   m_Layer: 0
-  m_Name: box_bonus
+  m_Name: b
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -128,3 +129,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   useTag: 1
   tagName: Player
+--- !u!114 &8495579383775826736
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7445605506484233521}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e02d3c4f748eb76438f773d147b68a10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lifeTime: 5
