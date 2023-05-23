@@ -1,0 +1,258 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43f4de31cc4ea49b8ab005fb966d553c, type: 3}
+  m_Name: slashshader
+  m_EditorClassIdentifier: 
+  generatesWithShaderGraph: 0
+  lit: 0
+  alphaClipping: 0
+  m_PropertiesStages: 02000000020000000200000002000000
+  compilationResult:
+    codeSnippets:
+    - '#include "Packages/com.unity.shadergraph/ShaderGraphLibrary/Functions.hlsl"
+
+'
+    - "// Node: Polar Coordinates\r\nvoid Unity_PolarCoordinates_float(float2 UV,
+      float2 Center, float RadialScale, float LengthScale, out float2 Out)\n{\n   
+      float2 delta = UV - Center;\n    float radius = length(delta) * 2 * RadialScale;\n   
+      float angle = atan2(delta.x, delta.y) * 1.0/6.28 * LengthScale;\n    Out =
+      float2(radius, angle);\n}\r\n"
+    - "// Node: One Minus\r\nvoid Unity_OneMinus_float(float In, out float Out)\n{\n   
+      Out = 1 - In;\n}\r\n"
+    - "// Node: Clamp\r\nvoid Unity_Clamp_float(float In, float Min, float Max, out
+      float Out)\n{\n    Out = clamp(In, Min, Max);\n}\r\n"
+    - "// Node: Power\r\nvoid Unity_Power_float(float A, float B, out float Out)\n{\n   
+      Out = pow(A, B);\n}\r\n"
+    - '// Node: Multiply
+
+      void Unity_Multiply_float_float(float A, float B,
+      out float Out)
+
+      {
+
+      Out = A * B;
+
+      }
+
+'
+    - "// Node: Voronoi\r\ninline float2 Unity_Voronoi_RandomVector_float (float2
+      UV, float offset)\n{\n    float2x2 m = float2x2(15.27, 47.63, 99.41, 89.98);\n   
+      UV = frac(sin(mul(UV, m)));\n    return float2(sin(UV.y*+offset)*0.5+0.5, cos(UV.x*offset)*0.5+0.5);\n}\r\n"
+    - "// Node: Voronoi\r\nvoid Unity_Voronoi_float(float2 UV, float AngleOffset,
+      float CellDensity, out float Out, out float Cells)\n{\n    float2 g = floor(UV
+      * CellDensity);\n    float2 f = frac(UV * CellDensity);\n    float t = 8.0;\n   
+      float3 res = float3(8.0, 0.0, 0.0);\n\n    for(int y=-1; y<=1; y++)\n    {\n       
+      for(int x=-1; x<=1; x++)\n        {\n            float2 lattice = float2(x,y);\n           
+      float2 offset = Unity_Voronoi_RandomVector_float(lattice + g, AngleOffset);\n           
+      float d = distance(lattice + offset, f);\n\n            if(d < res.x)\n           
+      {\n                res = float3(d, offset.x, offset.y);\n                Out
+      = res.x;\n                Cells = res.y;\n            }\n        }\n    }\n}\r\n"
+    - '// Node: Multiply
+
+      void Unity_Multiply_float4_float4(float4 A, float4
+      B, out float4 Out)
+
+      {
+
+      Out = A * B;
+
+      }
+
+'
+    - 'struct SG_Input_0e880b62d47945e4c87b0ccfc14cbb7d
+
+      {
+
+'
+    - '    half4 uv0;
+
+'
+    - '    float3 TimeParameters;
+
+'
+    - '};
+
+      
+
+'
+    - 'struct SG_Output_0e880b62d47945e4c87b0ccfc14cbb7d
+
+      {'
+    - "\r\n    float3 BaseColor_6;"
+    - "\r\n    float Alpha_4;"
+    - '
+
+      };
+
+      
+
+'
+    - "SG_Output_0e880b62d47945e4c87b0ccfc14cbb7d SG_Evaluate_0e880b62d47945e4c87b0ccfc14cbb7d(\r\n   
+      SG_Input_0e880b62d47945e4c87b0ccfc14cbb7d IN"
+    - ",\r\n    /* Property: voronoiscale */ float _voronoiscale"
+    - ",\r\n    /* Property: Color */ float4 _Color"
+    - ",\r\n    /* Property: voronoispeed */ float _voronoispeed"
+    - ",\r\n    /* Property: voronoipower */ float _voronoipower"
+    - ')
+
+      {'
+    - "\r\n    // Node: Polar Coordinates\r\nfloat2 _PolarCoordinates_13fd5a33a96046b48e0a62869c2e5b2d_Out_4;\nUnity_PolarCoordinates_float(IN.uv0.xy,
+      float2 (0.5, 0.5), 1, 1, _PolarCoordinates_13fd5a33a96046b48e0a62869c2e5b2d_Out_4);\n"
+    - "\r\n    // Node: Split\r\nfloat _Split_821173faff3242ecbff7a93f5d62694d_R_1
+      = _PolarCoordinates_13fd5a33a96046b48e0a62869c2e5b2d_Out_4[0];\nfloat _Split_821173faff3242ecbff7a93f5d62694d_G_2
+      = _PolarCoordinates_13fd5a33a96046b48e0a62869c2e5b2d_Out_4[1];\nfloat _Split_821173faff3242ecbff7a93f5d62694d_B_3
+      = 0;\nfloat _Split_821173faff3242ecbff7a93f5d62694d_A_4 = 0;\n"
+    - "\r\n    // Node: One Minus\r\nfloat _OneMinus_6168ceb386294531a084488d7d6a0246_Out_1;\nUnity_OneMinus_float(_Split_821173faff3242ecbff7a93f5d62694d_R_1,
+      _OneMinus_6168ceb386294531a084488d7d6a0246_Out_1);\n"
+    - "\r\n    // Node: Clamp\r\nfloat _Clamp_3c264826e8c548448b5266ec335894f4_Out_3;\nUnity_Clamp_float(_OneMinus_6168ceb386294531a084488d7d6a0246_Out_1,
+      0, 1, _Clamp_3c264826e8c548448b5266ec335894f4_Out_3);\n"
+    - "\r\n    // Node: Power\r\nfloat _Power_b9b5b87ea0c04d9093bab9a675b6d4f1_Out_2;\nUnity_Power_float(_Clamp_3c264826e8c548448b5266ec335894f4_Out_3,
+      2.87, _Power_b9b5b87ea0c04d9093bab9a675b6d4f1_Out_2);\n"
+    - "\r\n    // Node: Property\r\nfloat _Property_194cfddf52e24eb08eaeec95fd312ea7_Out_0
+      = _voronoispeed;\n"
+    - "\r\n    // Node: Multiply\r\nfloat _Multiply_7abafa3c9f164f279aaed381307d2f8c_Out_2;\nUnity_Multiply_float_float(_Property_194cfddf52e24eb08eaeec95fd312ea7_Out_0,
+      IN.TimeParameters.x, _Multiply_7abafa3c9f164f279aaed381307d2f8c_Out_2);\n"
+    - "\r\n    // Node: Property\r\nfloat _Property_2159d92c63184bc49cb4c71fe1b95956_Out_0
+      = _voronoiscale;\n"
+    - "\r\n    // Node: Voronoi\r\nfloat _Voronoi_115bc5ee8daa4257a7254ff373828d78_Out_3;\nfloat
+      _Voronoi_115bc5ee8daa4257a7254ff373828d78_Cells_4;\nUnity_Voronoi_float(IN.uv0.xy,
+      _Multiply_7abafa3c9f164f279aaed381307d2f8c_Out_2, _Property_2159d92c63184bc49cb4c71fe1b95956_Out_0,
+      _Voronoi_115bc5ee8daa4257a7254ff373828d78_Out_3, _Voronoi_115bc5ee8daa4257a7254ff373828d78_Cells_4);\n"
+    - "\r\n    // Node: Property\r\nfloat _Property_69dbe8865e84424ab26bc160dc483940_Out_0
+      = _voronoipower;\n"
+    - "\r\n    // Node: Power\r\nfloat _Power_b537f795b9ad4e33bc6a38e1d9de7820_Out_2;\nUnity_Power_float(_Voronoi_115bc5ee8daa4257a7254ff373828d78_Out_3,
+      _Property_69dbe8865e84424ab26bc160dc483940_Out_0, _Power_b537f795b9ad4e33bc6a38e1d9de7820_Out_2);\n"
+    - "\r\n    // Node: Multiply\r\nfloat _Multiply_c545c71650f54a1799d84128259a3497_Out_2;\nUnity_Multiply_float_float(_Power_b9b5b87ea0c04d9093bab9a675b6d4f1_Out_2,
+      _Power_b537f795b9ad4e33bc6a38e1d9de7820_Out_2, _Multiply_c545c71650f54a1799d84128259a3497_Out_2);\n"
+    - "\r\n    // Node: Property\r\nfloat4 _Property_0a229a1024d54887a3336656c7f937c2_Out_0
+      = IsGammaSpace() ? LinearToSRGB(_Color) : _Color;\n"
+    - "\r\n    // Node: Multiply\r\nfloat4 _Multiply_9272aeaad56248fdbee33c2d7c54e7b3_Out_2;\nUnity_Multiply_float4_float4((_Multiply_c545c71650f54a1799d84128259a3497_Out_2.xxxx),
+      _Property_0a229a1024d54887a3336656c7f937c2_Out_0, _Multiply_9272aeaad56248fdbee33c2d7c54e7b3_Out_2);\n"
+    - "\r\n    // Node: Split\r\nfloat _Split_8e43c4db52be427e97cef7f2e35b3d97_R_1
+      = _Property_0a229a1024d54887a3336656c7f937c2_Out_0[0];\nfloat _Split_8e43c4db52be427e97cef7f2e35b3d97_G_2
+      = _Property_0a229a1024d54887a3336656c7f937c2_Out_0[1];\nfloat _Split_8e43c4db52be427e97cef7f2e35b3d97_B_3
+      = _Property_0a229a1024d54887a3336656c7f937c2_Out_0[2];\nfloat _Split_8e43c4db52be427e97cef7f2e35b3d97_A_4
+      = _Property_0a229a1024d54887a3336656c7f937c2_Out_0[3];\n"
+    - "\r\n    // Node: Multiply\r\nfloat _Multiply_5396a85966014f5c96df096cfb8dad2c_Out_2;\nUnity_Multiply_float_float(_Multiply_c545c71650f54a1799d84128259a3497_Out_2,
+      _Split_8e43c4db52be427e97cef7f2e35b3d97_A_4, _Multiply_5396a85966014f5c96df096cfb8dad2c_Out_2);\n"
+    - "\r\n    // VFXMasterNode\r\n    SG_Output_0e880b62d47945e4c87b0ccfc14cbb7d
+      OUT;\r\n"
+    - '    OUT.BaseColor_6 = (_Multiply_9272aeaad56248fdbee33c2d7c54e7b3_Out_2.xyz);
+
+'
+    - '    OUT.Alpha_4 = _Multiply_5396a85966014f5c96df096cfb8dad2c_Out_2;
+
+'
+    - '    return OUT;
+
+      }
+
+'
+    sharedCodeIndices: 00000000090000000c0000000d000000100000001100000016000000270000002a000000
+    outputCodeIndices:
+    - array: 01000000020000000300000004000000050000000600000007000000080000000a0000000b0000000e000000120000001300000014000000150000001700000018000000190000001a0000001b0000001c0000001d0000001e0000001f000000200000002100000022000000230000002400000028000000
+    - array: 010000000200000003000000040000000500000006000000070000000a0000000b0000000f000000120000001300000014000000150000001700000018000000190000001a0000001b0000001c0000001d0000001e0000001f00000020000000210000002200000023000000250000002600000029000000
+  portRequirements:
+  - m_RequiresNormal: 0
+    m_RequiresBitangent: 0
+    m_RequiresTangent: 0
+    m_RequiresViewDir: 0
+    m_RequiresPosition: 0
+    m_RequiresPositionPredisplacement: 0
+    m_RequiresScreenPosition: 0
+    m_RequiresVertexColor: 0
+    m_RequiresFaceSign: 0
+    m_RequiresMeshUVs: 00000000
+    m_RequiresDepthTexture: 0
+    m_RequiresCameraOpaqueTexture: 0
+    m_RequiresTime: 1
+    m_RequiresVertexSkinning: 0
+    m_RequiresVertexID: 0
+  - m_RequiresNormal: 0
+    m_RequiresBitangent: 0
+    m_RequiresTangent: 0
+    m_RequiresViewDir: 0
+    m_RequiresPosition: 0
+    m_RequiresPositionPredisplacement: 0
+    m_RequiresScreenPosition: 0
+    m_RequiresVertexColor: 0
+    m_RequiresFaceSign: 0
+    m_RequiresMeshUVs: 00000000
+    m_RequiresDepthTexture: 0
+    m_RequiresCameraOpaqueTexture: 0
+    m_RequiresTime: 1
+    m_RequiresVertexSkinning: 0
+    m_RequiresVertexID: 0
+  m_EvaluationFunctionName: SG_Evaluate_0e880b62d47945e4c87b0ccfc14cbb7d
+  m_InputStructName: SG_Input_0e880b62d47945e4c87b0ccfc14cbb7d
+  m_OutputStructName: SG_Output_0e880b62d47945e4c87b0ccfc14cbb7d
+  m_ConcretePrecision: 0
+  m_SerializedVfxAssetData:
+    typeInfo:
+      fullName: 
+    JSONnodeData: "{\n    \"m_SGVersion\": 0,\n    \"m_Type\": \"UnityEditor.ShaderGraph.Internal.ShaderGraphVfxAsset+ShaderGraphVfxAssetData\",\n   
+      \"m_ObjectId\": \"62a6f91fc4aa4373b346b630e2cdd1a8\",\n    \"m_Properties\":
+      [\n        {\n            \"m_Id\": \"c3fd38119853408dbde11e7b07899100\"\n       
+      },\n        {\n            \"m_Id\": \"9203fed0a36c47f1ac9bfc4dde6ebf3a\"\n       
+      },\n        {\n            \"m_Id\": \"7e303301134d4e368f29c7ea16d17e70\"\n       
+      },\n        {\n            \"m_Id\": \"3c71dc31d7af4f0dad0821ca30265cd1\"\n       
+      }\n    ]\n}\n\n{\n    \"m_SGVersion\": 1,\n    \"m_Type\": \"UnityEditor.ShaderGraph.Internal.Vector1ShaderProperty\",\n   
+      \"m_ObjectId\": \"3c71dc31d7af4f0dad0821ca30265cd1\",\n    \"m_Guid\": {\n       
+      \"m_GuidSerialized\": \"9f8a6e8a-215e-4b9b-b75c-4ffb45f2efbb\"\n    },\n   
+      \"m_Name\": \"voronoipower\",\n    \"m_DefaultRefNameVersion\": 1,\n    \"m_RefNameGeneratedByDisplayName\":
+      \"voronoipower\",\n    \"m_DefaultReferenceName\": \"_voronoipower\",\n   
+      \"m_OverrideReferenceName\": \"\",\n    \"m_GeneratePropertyBlock\": true,\n   
+      \"m_UseCustomSlotLabel\": false,\n    \"m_CustomSlotLabel\": \"\",\n    \"m_Precision\":
+      0,\n    \"overrideHLSLDeclaration\": false,\n    \"hlslDeclarationOverride\":
+      0,\n    \"m_Hidden\": false,\n    \"m_Value\": 2.0,\n    \"m_FloatType\": 0,\n   
+      \"m_RangeValues\": {\n        \"x\": 0.0,\n        \"y\": 1.0\n    }\n}\n\n{\n   
+      \"m_SGVersion\": 1,\n    \"m_Type\": \"UnityEditor.ShaderGraph.Internal.Vector1ShaderProperty\",\n   
+      \"m_ObjectId\": \"7e303301134d4e368f29c7ea16d17e70\",\n    \"m_Guid\": {\n       
+      \"m_GuidSerialized\": \"cec49826-61f5-40f8-8539-af30127aef5e\"\n    },\n   
+      \"m_Name\": \"voronoispeed\",\n    \"m_DefaultRefNameVersion\": 1,\n    \"m_RefNameGeneratedByDisplayName\":
+      \"voronoispeed\",\n    \"m_DefaultReferenceName\": \"_voronoispeed\",\n   
+      \"m_OverrideReferenceName\": \"\",\n    \"m_GeneratePropertyBlock\": true,\n   
+      \"m_UseCustomSlotLabel\": false,\n    \"m_CustomSlotLabel\": \"\",\n    \"m_Precision\":
+      0,\n    \"overrideHLSLDeclaration\": false,\n    \"hlslDeclarationOverride\":
+      0,\n    \"m_Hidden\": false,\n    \"m_Value\": 5.0,\n    \"m_FloatType\": 0,\n   
+      \"m_RangeValues\": {\n        \"x\": 0.0,\n        \"y\": 1.0\n    }\n}\n\n{\n   
+      \"m_SGVersion\": 3,\n    \"m_Type\": \"UnityEditor.ShaderGraph.Internal.ColorShaderProperty\",\n   
+      \"m_ObjectId\": \"9203fed0a36c47f1ac9bfc4dde6ebf3a\",\n    \"m_Guid\": {\n       
+      \"m_GuidSerialized\": \"4403b4e5-e0f2-4a01-91d8-6156d6dcae31\"\n    },\n   
+      \"m_Name\": \"Color\",\n    \"m_DefaultRefNameVersion\": 1,\n    \"m_RefNameGeneratedByDisplayName\":
+      \"Color\",\n    \"m_DefaultReferenceName\": \"_Color\",\n    \"m_OverrideReferenceName\":
+      \"\",\n    \"m_GeneratePropertyBlock\": true,\n    \"m_UseCustomSlotLabel\":
+      false,\n    \"m_CustomSlotLabel\": \"\",\n    \"m_Precision\": 0,\n    \"overrideHLSLDeclaration\":
+      false,\n    \"hlslDeclarationOverride\": 0,\n    \"m_Hidden\": false,\n   
+      \"m_Value\": {\n        \"r\": 1.0,\n        \"g\": 1.0,\n        \"b\": 1.0,\n       
+      \"a\": 1.0\n    },\n    \"isMainColor\": false,\n    \"m_ColorMode\": 1\n}\n\n{\n   
+      \"m_SGVersion\": 1,\n    \"m_Type\": \"UnityEditor.ShaderGraph.Internal.Vector1ShaderProperty\",\n   
+      \"m_ObjectId\": \"c3fd38119853408dbde11e7b07899100\",\n    \"m_Guid\": {\n       
+      \"m_GuidSerialized\": \"fb035d8d-9331-43df-abb5-a32a07dfc95b\"\n    },\n   
+      \"m_Name\": \"voronoiscale\",\n    \"m_DefaultRefNameVersion\": 1,\n    \"m_RefNameGeneratedByDisplayName\":
+      \"voronoiscale\",\n    \"m_DefaultReferenceName\": \"_voronoiscale\",\n   
+      \"m_OverrideReferenceName\": \"\",\n    \"m_GeneratePropertyBlock\": true,\n   
+      \"m_UseCustomSlotLabel\": false,\n    \"m_CustomSlotLabel\": \"\",\n    \"m_Precision\":
+      0,\n    \"overrideHLSLDeclaration\": false,\n    \"hlslDeclarationOverride\":
+      0,\n    \"m_Hidden\": false,\n    \"m_Value\": 6.0,\n    \"m_FloatType\": 0,\n   
+      \"m_RangeValues\": {\n        \"x\": 0.0,\n        \"y\": 1.0\n    }\n}\n\n"
+  outputPropertyIndices:
+  - array: 00000000010000000200000003000000
+  - array: 00000000010000000200000003000000
+  m_Outputs:
+  - m_Index: 0
+    m_ReferenceName: BaseColor
+    m_Id: 6
+  - m_Index: 1
+    m_ReferenceName: Alpha
+    m_Id: 4
+  m_TextureInfos: []
