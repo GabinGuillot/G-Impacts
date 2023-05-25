@@ -6,6 +6,8 @@ TagManager:
   tags:
   - balle
   - Void
+  - ShieldBonus
+  - SpeedBonus
   layers:
   - Default
   - TransparentFX
