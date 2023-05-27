@@ -13,6 +13,9 @@ TagManager:
   - Player3
   - Player4
   - DeathZone
+  - WingsBonus
+  - SlowBonus
+  - StunBonus
   layers:
   - Default
   - TransparentFX

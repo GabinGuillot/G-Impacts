@@ -7,9 +7,8 @@ public class PlayerMovement : MonoBehaviour
     public bool hasShield = false;
     public bool hasWings = false;
     public bool hasSpeed = false;
-    public bool hasExplosive = false;
-    public bool canThrow = false;
-    public bool hasRange = false;
+    public bool isSlowed = false;
+    public bool isStunned = false;
     public GameObject shieldPrefab;
     public GameObject wingsPrefab;
 
@@ -61,27 +60,6 @@ public class PlayerMovement : MonoBehaviour
         {
             hasWings = true;
             wingsPrefab.SetActive(true);
-            // Additional actions when collecting the shield bonus
-            // For example, you can disable the collider or the bonus object itself
-            Destroy(other.gameObject);
-        }
-        if (other.CompareTag("RangeBonus"))
-        {
-            hasRange = true;
-            // Additional actions when collecting the shield bonus
-            // For example, you can disable the collider or the bonus object itself
-            Destroy(other.gameObject);
-        }
-        if (other.CompareTag("ThrowBonus"))
-        {
-            canThrow = true;
-            // Additional actions when collecting the shield bonus
-            // For example, you can disable the collider or the bonus object itself
-            Destroy(other.gameObject);
-        }
-        if (other.CompareTag("ExplosiveBonus"))
-        {
-            hasExplosive = true;
             // Additional actions when collecting the shield bonus
             // For example, you can disable the collider or the bonus object itself
             Destroy(other.gameObject);
