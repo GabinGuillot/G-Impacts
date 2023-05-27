@@ -20,7 +20,7 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Player1
   - Water
   - UI
   - Player Blue
@@ -31,7 +31,7 @@ TagManager:
   - Floor
   - Batte
   - Bonus
-  - 
+  - Player2
   - 
   - 
   - 
