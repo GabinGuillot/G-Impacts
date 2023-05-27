@@ -3,6 +3,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     public float speed = 5f; //
+    public float rotationSpeed = 5f;
     public bool hasShield = false;
     public bool hasWings = false;
     public bool hasSpeed = false;
@@ -21,22 +22,30 @@ public class PlayerMovement : MonoBehaviour
     }
 
     private void FixedUpdate()
+{
+    float horizontalInput = Input.GetAxis("Horizontal");
+    float verticalInput = Input.GetAxis("Vertical");
+
+    Vector3 movement = new Vector3(horizontalInput, 0f, verticalInput);
+    movement.Normalize();
+
+    if (hasSpeed)
     {
-        float horizontalInput = Input.GetAxis("Horizontal");
-        float verticalInput = Input.GetAxis("Vertical");
-
-        Vector3 movement = new Vector3(horizontalInput, 0f, verticalInput);
-
-        movement *= speed;
-        movement.y = rb.velocity.y;
-
-        rb.velocity = movement;
-
-        if (hasSpeed==true)
-        {
-            movement *= speedMultiplier;
-        }
+        movement *= speedMultiplier;
     }
+
+    if (movement.magnitude > 0.1f)
+    {
+        Quaternion targetRotation = Quaternion.LookRotation(movement);
+        transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, rotationSpeed * Time.fixedDeltaTime / Time.timeScale);
+    }
+
+    movement.y = 0f; // Set the Y component to zero
+
+    rb.velocity = new Vector3(movement.x * speed, 0f, movement.z * speed);
+}
+
+
 
     private void OnTriggerEnter(Collider other)
     {

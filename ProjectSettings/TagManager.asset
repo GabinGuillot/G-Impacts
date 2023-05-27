@@ -8,6 +8,11 @@ TagManager:
   - Void
   - ShieldBonus
   - SpeedBonus
+  - Player1
+  - Player2
+  - Player3
+  - Player4
+  - DeathZone
   layers:
   - Default
   - TransparentFX
